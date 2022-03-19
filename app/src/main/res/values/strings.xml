@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My University Expense Tracker</string>
+    //TODO edit these
+    <string name="activity_add_new_short_event">Add A New Short Event</string>
+    <string name="activity_choose_account">Choose Account</string>
+    <string name="activity_main">Your Main Page</string>
+    <string name="activity_registration">Register</string>
+</resources>

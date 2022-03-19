@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Return to Main"
+        android:id="@+id/btnReturnMain"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Account Details:"
+            android:id="@+id/enterAccountDetailsText"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:id="@+id/edtTxtFirstName"
+            android:layout_below="@id/enterAccountDetailsText"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:minWidth="200dp"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:id="@+id/edtTxtLastName"
+            android:layout_below="@id/edtTxtFirstName"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:minWidth="200dp"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:id="@+id/edtTxtPassword1"
+            android:layout_below="@id/edtTxtLastName"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:minWidth="200dp"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Re-Enter Password"
+            android:id="@+id/edtTxtPassword2"
+            android:layout_below="@id/edtTxtPassword1"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:minWidth="200dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:id="@+id/btnRegister"
+            android:layout_below="@id/edtTxtPassword2"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

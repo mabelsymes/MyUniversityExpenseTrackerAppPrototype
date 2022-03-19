@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNewLongEventActivity"
+    android:layout_margin="20dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtLongEventNameRelLayout"
+            >
+
+            <EditText
+                android:id="@+id/edtTxtLongEventName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="18sp"
+                android:hint="Event Name" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtLongEventNameRelLayout"
+            android:id="@+id/longCategoriesSpinnerRelLayout"
+            >
+
+            <Spinner
+                android:id="@+id/longCategoriesSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/longEventCalenderRelLayout"
+            android:layout_below="@id/longCategoriesSpinnerRelLayout"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Date"
+                android:textAllCaps="false"
+                android:layout_marginRight="20dp"
+                android:id="@+id/btnSelectLongDate"
+                />
+
+            <TextView
+                android:id="@+id/txtLongDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/btnSelectLongDate"
+                android:hint="Selected Date"
+                android:layout_centerVertical="true"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/longEventCalenderRelLayout"
+            android:id="@+id/longRepeatPeriodRelLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Repeat Period"
+                android:layout_marginTop="20dp"
+                android:id="@+id/edtTxtLongRepetition"
+                android:layout_centerVertical="true"
+                />
+
+            <Spinner
+                android:id="@+id/repetitionOptionsSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/edtTxtLongRepetition"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/longEventIncomeRelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/longRepeatPeriodRelLayout"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Spinner
+                android:id="@+id/longIncomeOutcomeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/poundSign"
+                android:text="£"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/longIncomeOutcomeSpinner"
+                />
+
+            <EditText
+                android:id="@+id/edtTxtLongEventMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/poundSign"
+                android:hint="Amount of Money"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/longEventIncomeRelLayout"
+            android:id="@+id/longEventDescRelLayout"
+            >
+
+            <TextView
+                android:id="@+id/longEventDescText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Enter Description (optional):"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edtTxtLongEventDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/longEventDescText"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:hint="Description (optional)"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/longEventDescRelLayout"
+            >
+
+            <Button
+                android:id="@+id/btnCancelAddingLongEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                />
+
+            <Button
+                android:id="@+id/btnAddLongActivityConfirmed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/btnCancelAddingLongEvent"
+                android:text="Confirm" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

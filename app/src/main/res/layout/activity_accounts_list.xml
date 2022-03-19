@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/parent"
+    tools:context=".AccountsList"
+    app:cardElevation="7dp"
+    app:cardCornerRadius="7dp"
+    android:layout_margin="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/displayAccountRelLayout"
+        android:layout_margin="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:id="@+id/txtFullName"
+            android:minWidth="200dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_toRightOf="@id/txtFullName"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/red"
+            android:id="@+id/btnDelete"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

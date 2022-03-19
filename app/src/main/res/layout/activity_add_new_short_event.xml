@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNewShortEventActivity"
+    android:layout_margin="20dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtShortEventNameRelLayout"
+            >
+
+            <EditText
+                android:id="@+id/edtTxtShortEventName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="18sp"
+                android:hint="Event Name" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtShortEventNameRelLayout"
+            android:id="@+id/shortCategoriesSpinnerRelLayout"
+            >
+
+            <Spinner
+                android:id="@+id/shortCategoriesSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shortEventCalenderRelLayout"
+            android:layout_below="@id/shortCategoriesSpinnerRelLayout"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Button
+                android:id="@+id/btnSelectShortDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="Select Date"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Selected Date"
+                android:id="@+id/txtShortDate"
+                android:textSize="18sp"
+                android:layout_toRightOf="@+id/btnSelectShortDate"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/shortEventIncomeRelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shortEventCalenderRelLayout"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Spinner
+                android:id="@+id/shortIncomeOutcomeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/poundSign"
+                android:text="£"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/shortIncomeOutcomeSpinner"
+                />
+
+            <EditText
+                android:id="@+id/edtTxtShortEventMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/poundSign"
+                android:layout_marginLeft="3dp"
+                android:hint="Amount of Money"
+                android:textSize="18sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shortEventIncomeRelLayout"
+            android:id="@+id/shortEventDescRelLayout"
+            >
+
+            <TextView
+                android:id="@+id/shortEventDescText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Enter Description (optional):"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edtTxtShortEventDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shortEventDescText"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:hint="Description (optional)"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/shortEventDescRelLayout"
+            >
+
+            <Button
+                android:id="@+id/btnCancelAddingShortEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                />
+
+            <Button
+                android:id="@+id/btnAddShortActivityConfirmed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/btnCancelAddingShortEvent"
+                android:text="Confirm" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

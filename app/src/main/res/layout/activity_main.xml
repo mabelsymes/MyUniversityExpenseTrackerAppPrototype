@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+
+<!--    Account heading-->
+    <RelativeLayout
+        android:id="@+id/accountHeadingRelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/teal_200">
+
+        <Button
+            android:id="@+id/btnSwitchAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="Change Account"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/currentAccountTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/btnSwitchAccount"
+            android:text="Current Account:    " />
+
+        <TextView
+            android:id="@+id/txtFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/currentAccountTxt"
+            android:text="Account name"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
+
+<!--Key Account Information-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/keyAccountInfoRelLayout"
+        android:layout_below="@id/accountHeadingRelLayout"
+        android:layout_marginTop="20dp"
+        >
+
+        <TextView
+            android:id="@+id/txtTotalBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Total Balance"
+            android:textSize="60sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/currentBalanceText"
+            android:layout_below="@+id/txtTotalBalance"
+            android:layout_centerHorizontal="true"
+            android:text="Current Balance"
+            android:textSize="15sp"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/currentBalanceText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
+            >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/incomeInfoRelLayout"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtTotalIncomes"
+                    android:text="Income"
+                    android:textSize="40sp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtTotalIncomes"
+                    android:text="Current Income"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/incomeInfoRelLayout"
+                android:layout_marginLeft="50dp"
+                android:id="@+id/outgoingsInfoRelLayout"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtTotalOutgoings"
+                    android:text="Outgoing"
+                    android:textSize="40sp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtTotalOutgoings"
+                    android:text="Current Outgoings"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+<!--    Soon to be WeeklyBudget-->
+    <RelativeLayout
+        android:id="@+id/weeklyBudgetRelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/keyAccountInfoRelLayout"
+        android:layout_marginTop="20dp"
+        android:background="@color/teal_200"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weekly Budget:   £"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/budgetText"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budget"
+            android:layout_toRightOf="@id/budgetText"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:id="@+id/txtBudget"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:id="@+id/btnChangeBudget"
+            android:layout_below="@+id/txtBudget"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budget Left: "
+            android:layout_below="@id/budgetText"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:id="@+id/budgetRemainingText"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            android:layout_toRightOf="@id/budgetRemainingText"
+            android:layout_below="@id/txtBudget"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:id="@+id/txtBudgetRemaining"
+            />
+
+    </RelativeLayout>
+
+<!--    Top stuff and adding stuff-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weeklyBudgetRelLayout"
+        android:layout_margin="20dp"
+        >
+
+        Top Incomes and Outgoings-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TopIncomesAndOutgoingsRelLayout"
+            android:layout_centerVertical="true"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Top Incomes:"
+                android:id="@+id/topIncomesText"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Top Income"
+                android:id="@+id/txtTopIncome"
+                android:layout_below="@id/topIncomesText"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Second Top Income"
+                android:id="@+id/txtSecondTopIncome"
+                android:layout_below="@id/txtTopIncome"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Third Top Income"
+                android:id="@+id/txtThirdTopIncome"
+                android:layout_below="@id/txtSecondTopIncome"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/topOutgoingsText"
+                android:text="Top Outgoings"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/txtThirdTopIncome"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtTopOutgoing"
+                android:layout_below="@+id/topOutgoingsText"
+                android:hint="Top Outgoing"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtSecondTopOutgoing"
+                android:layout_below="@id/txtTopOutgoing"
+                android:hint="Second Top Outgoing"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtThirdTopOutgoing"
+                android:layout_below="@id/txtSecondTopOutgoing"
+                android:hint="Third Top Outgoing"
+                android:textSize="15sp"
+                />
+
+        </RelativeLayout>
+
+        <!--    Adding Events-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editEventsRelLayout"
+            android:layout_toRightOf="@id/TopIncomesAndOutgoingsRelLayout"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnEditShortEvents"
+                android:text="Edit Short Events"
+                android:textAllCaps="false"
+                android:layout_margin="10dp"
+                android:minWidth="170dp"
+                android:maxWidth="170dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnEditLongEvents"
+                android:text="Edit Long Events"
+                android:layout_below="@id/btnEditShortEvents"
+                android:textAllCaps="false"
+                android:minWidth="170dp"
+                android:maxWidth="170dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

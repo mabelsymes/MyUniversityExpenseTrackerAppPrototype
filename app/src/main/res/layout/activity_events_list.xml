@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/eventsParent"
+    tools:context=".EventsList"
+    app:cardElevation="7dp"
+    app:cardCornerRadius="7dp"
+    android:layout_margin="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/displayEventsRelLayout"
+        android:layout_margin="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shortEventsCollapsedRelLayout"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:id="@+id/txtShortEventCategory"
+                android:minWidth="100dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/purple_500"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:layout_toRightOf="@+id/txtShortEventCategory"
+                android:id="@+id/txtEventName"
+                android:minWidth="140dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:layout_toRightOf="@id/txtEventName"
+                android:textColor="@color/red"
+                android:id="@+id/btnDeleteEvent"
+                android:layout_marginRight="7dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_down_arrow"
+                android:id="@+id/btnDownArrow"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp"
+                />
+
+        </RelativeLayout>
+
+<!--        Collapsible Rel Layout-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shortEventsCollapsedRelLayout"
+            android:layout_marginTop="5dp"
+            android:id="@+id/shortEventsExpandedRelLayout"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Of Event:"
+                android:id="@+id/dateCreatedText"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:id="@+id/txtDateCreated"
+                android:layout_toRightOf="@+id/dateCreatedText"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Income/Outcome:"
+                android:id="@+id/txtShortIncomeOutcome"
+                android:layout_below="@+id/dateCreatedText"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventListPoundSign"
+                android:text="£"
+                android:layout_marginRight="3dp"
+                android:layout_below="@+id/txtDateCreated"
+                android:layout_marginTop="7dp"
+                android:layout_toRightOf="@+id/txtShortIncomeOutcome"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Money"
+                android:layout_toRightOf="@+id/eventListPoundSign"
+                android:layout_below="@id/txtDateCreated"
+                android:layout_marginTop="7dp"
+                android:id="@+id/txtShortEventMoney"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Repeats:"
+                android:layout_toRightOf="@+id/txtShortEventMoney"
+                android:layout_below="@+id/txtDateCreated"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/repeatPeriodTxt"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtRepeatPeriod"
+                android:layout_below="@+id/txtDateCreated"
+                android:layout_toRightOf="@+id/repeatPeriodTxt"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="10dp"
+                android:text="h"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description:"
+                android:layout_below="@id/txtShortIncomeOutcome"
+                android:layout_marginTop="7dp"
+                android:id="@+id/shortEventListDescText"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shortEventListDescText"
+                android:layout_marginTop="5dp"
+                android:text="Description goes here"
+                android:id="@+id/txtShortEventDesc"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_up_arrow"
+                android:id="@+id/btnUpArrow"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/txtShortEventDesc"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnEditEvent"
+                android:layout_toLeftOf="@id/btnUpArrow"
+                android:layout_below="@id/txtShortEventDesc"
+                android:text="Edit"
+                android:layout_marginRight="3dp"
+                android:textColor="@color/red"
+                />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

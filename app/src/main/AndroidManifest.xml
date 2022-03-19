@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myuniversityexpensetracker">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyUniversityExpenseTracker">
+        <activity
+            android:name=".ChangeBudgetActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddNewLongEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LongEventsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LogInActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddNewShortEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EventsList"
+            android:exported="true" />
+        <activity
+            android:name=".ShortEventsActivity"
+            android:exported="true" />
+        <activity android:name=".AccountsList" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".ChooseAccountActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeBudgetActivity"
+    android:padding="10dp"
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return to Main"
+        android:id="@+id/btnReturnMain"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chooseBudgetDateRelLayout"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select date"
+                android:id="@+id/btnSelectBudgetDate"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/0/0"
+                android:layout_toRightOf="@+id/btnSelectBudgetDate"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:textSize="20sp"
+                android:id="@+id/txtBudgetDate"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chooseBudgetDateRelLayout"
+            android:text="Budget Duration: "
+            android:id="@+id/budgetDurationText"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editBudgetDurationRelLayout"
+            android:layout_below="@id/budgetDurationText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Number"
+                android:textSize="20sp"
+                android:id="@+id/edtTxtBudgetDuration"
+                android:layout_marginRight="20dp"
+                android:layout_centerVertical="true"
+                />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/budgetTimePeriodSpinner"
+                android:layout_toRightOf="@id/edtTxtBudgetDuration"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/editBudgetDurationRelLayout"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budget Amount:     £"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:id="@+id/budgetAmountText"
+                />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/budgetAmountText"
+                android:hint="Money"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/edtTxtBudgetAmount"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/btnCancelEditingBudget"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm"
+            android:layout_toRightOf="@+id/btnCancelEditingBudget"
+            android:id="@+id/btnChangeBudgetConfirmed"
+            android:layout_marginLeft="50dp"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
