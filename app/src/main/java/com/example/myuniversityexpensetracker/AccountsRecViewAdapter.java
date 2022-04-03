@@ -48,6 +48,7 @@ public class AccountsRecViewAdapter extends RecyclerView.Adapter<AccountsRecView
                 Intent intent = new Intent(mContext,LogInActivity.class);
                 Log.d(TAG, "onClick: accountId in AccountsRecViewAdapter is " + accounts.get(position).getId());
                 intent.putExtra("accountId", accounts.get(position).getId());
+                intent.putExtra("deleteAccount", false);
                 mContext.startActivity(intent);
             }
         });
@@ -56,27 +57,10 @@ public class AccountsRecViewAdapter extends RecyclerView.Adapter<AccountsRecView
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("Are you sure you want to delete " + accounts.get(position).getFirstName() + "'s account?");
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Utils.getInstance(mContext).removeAccount(accounts.get(position));
-                        Toast.makeText(mContext, "Account Removed", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Account deleted");
-                        ArrayList<Account> accounts = Utils.getInstance(mContext).getAccounts();
-                        setAccounts(accounts);
-                        notifyDataSetChanged();
-                    }
-                });
-
-                builder.create().show();
+                Intent intent = new Intent(mContext,LogInActivity.class);
+                intent.putExtra("accountId", accounts.get(position).getId());
+                intent.putExtra("deleteAccount", true);
+                mContext.startActivity(intent);
             }
         });
     }

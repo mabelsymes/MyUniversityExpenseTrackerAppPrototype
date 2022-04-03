@@ -20,12 +20,22 @@
             android:textSize="30sp"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AccountText"
+            android:layout_below="@id/txtAccountName"
+            android:textSize="30sp"
+            android:text="Account:"
+            android:layout_centerHorizontal="true"
+            />
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edtTxtCheckPassword"
             android:hint="Enter Password"
-            android:layout_below="@id/txtAccountName"
+            android:layout_below="@id/AccountText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             />
