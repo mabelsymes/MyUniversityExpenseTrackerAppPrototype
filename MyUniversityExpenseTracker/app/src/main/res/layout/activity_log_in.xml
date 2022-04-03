@@ -18,6 +18,7 @@
             android:id="@+id/txtAccountName"
             android:hint="Account Name"
             android:textSize="30sp"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView

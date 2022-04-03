@@ -72,7 +72,6 @@ public class LogInActivity extends AppCompatActivity {
                                 Toast.makeText(LogInActivity.this, "Account Removed", Toast.LENGTH_SHORT).show();
                                 ArrayList<Account> accounts = Utils.getInstance(LogInActivity.this).getAccounts();
                                 Intent intent = new Intent(LogInActivity.this, ChooseAccountActivity.class);
-                                intent.putExtra("accountId", accountId);
                                 startActivity(intent);
                             }
                         });
