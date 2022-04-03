@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class LogInActivity extends AppCompatActivity {
 
+    // Test Commit
+
     int accountId;
     Button btnLogIn;
     EditText edtTxtCheckPassword;
