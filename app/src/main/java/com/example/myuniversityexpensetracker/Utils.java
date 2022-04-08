@@ -640,12 +640,14 @@ public class Utils {
         if (null != accounts) {
             for (Account a: accounts) {
                 if (a.getId() == account.getId()) {
+                    Log.d(TAG, "removeAccount: Id matches");
                     if (accounts.remove(a)) {
+                        Log.d(TAG, "removeAccount: accounts.remove(a) is true");
                         Gson gson = new Gson();
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.remove(ALL_ACCOUNTS_KEY);
                         editor.putString(ALL_ACCOUNTS_KEY, gson.toJson(accounts));
                         editor.commit();
+                        Log.d(TAG, "removeAccount: Editor committed");
                     }
                 }
             }

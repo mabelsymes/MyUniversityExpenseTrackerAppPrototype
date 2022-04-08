@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class ChooseAccountActivity extends AppCompatActivity {
 
+    private static final String TAG = "ChooseAccountActivity";
     private RecyclerView accountsRecView;
     private AccountsRecViewAdapter adapter;
     private Button btnAddNewAccount;
@@ -33,6 +35,7 @@ public class ChooseAccountActivity extends AppCompatActivity {
         accountsRecView.setAdapter(adapter);
         accountsRecView.setLayoutManager(new LinearLayoutManager(this));
 
+        Log.d(TAG, "onCreate: Adapter.setAccounts");
         adapter.setAccounts(Utils.getInstance(this).getAccounts());
 
         btnAddNewAccount.setOnClickListener(new View.OnClickListener() {

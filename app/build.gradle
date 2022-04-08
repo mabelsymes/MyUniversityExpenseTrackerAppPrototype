@@ -8,7 +8,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.myuniversityexpensetracker"
-        minSdkVersion 19
+        // changed from 19
+        minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
