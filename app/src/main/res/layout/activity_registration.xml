@@ -29,56 +29,103 @@
             android:layout_centerHorizontal="true"
             />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="First Name"
-            android:id="@+id/edtTxtFirstName"
+            android:minWidth="300dp"
+            android:id="@+id/firstNameRelLayout"
             android:layout_below="@id/enterAccountDetailsText"
-            android:layout_marginTop="50dp"
-            android:layout_centerHorizontal="true"
-            android:minWidth="200dp"
-            />
+            android:layout_marginTop="30dp"
+            >
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtTxtFirstName"
+                android:hint="Enter First Name"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:ems="15"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Last Name"
-            android:id="@+id/edtTxtLastName"
-            android:layout_below="@id/edtTxtFirstName"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:minWidth="200dp"
-            />
+            android:minWidth="300dp"
+            android:id="@+id/lastNameRelLayout"
+            android:layout_below="@id/firstNameRelLayout"
+            >
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtTxtLastName"
+                android:hint="Enter Last Name"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:ems="15"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            android:id="@+id/edtTxtPassword1"
-            android:layout_below="@id/edtTxtLastName"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:minWidth="200dp"
-            />
+            app:passwordToggleEnabled="true"
+            android:minWidth="300dp"
+            android:id="@+id/password1RelLayout"
+            android:layout_below="@id/lastNameRelLayout"
+            >
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtTxtPassword1"
+                android:hint="Enter Password"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:ems="15"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Re-Enter Password"
-            android:id="@+id/edtTxtPassword2"
-            android:layout_below="@id/edtTxtPassword1"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:minWidth="200dp"
-            />
+            app:passwordToggleEnabled="true"
+            android:minWidth="300dp"
+            android:id="@+id/password2RelLayout"
+            android:layout_below="@id/password1RelLayout"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtTxtPassword2"
+                android:hint="Re-enter Password"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:ems="15"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
             android:id="@+id/btnRegister"
-            android:layout_below="@id/edtTxtPassword2"
+            android:layout_below="@id/password2RelLayout"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
             android:textSize="15sp"

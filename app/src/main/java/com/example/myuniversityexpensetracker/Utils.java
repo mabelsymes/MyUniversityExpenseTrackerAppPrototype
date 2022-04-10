@@ -648,6 +648,7 @@ public class Utils {
                         editor.putString(ALL_ACCOUNTS_KEY, gson.toJson(accounts));
                         editor.commit();
                         Log.d(TAG, "removeAccount: Editor committed");
+                        break;
                     }
                 }
             }

@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-anydpi/ic_down_arrow.xml" value="0.1107214925708884" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_open_eye.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable-anydpi/ic_up_arrow.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layout/activity_accounts_list.xml" value="0.1328125" />
         <entry key="app/src/main/res/layout/activity_add_new_long_event.xml" value="0.1328125" />
+        <entry key="app/src/main/res/layout/activity_events_list.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.24909420289855072" />
+        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.2604166666666667" />
       </map>
     </option>
   </component>

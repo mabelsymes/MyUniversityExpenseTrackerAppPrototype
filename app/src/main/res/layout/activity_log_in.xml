@@ -19,6 +19,7 @@
             android:hint="Account Name"
             android:textSize="30sp"
             android:layout_centerHorizontal="true"
+            android:gravity="center"
             />
 
         <TextView
@@ -31,21 +32,44 @@
             android:layout_centerHorizontal="true"
             />
 
-        <EditText
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edtTxtCheckPassword"
-            android:hint="Enter Password"
             android:layout_below="@id/AccountText"
+            android:id="@+id/checkPasswordRelLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            />
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:minWidth="300dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtTxtCheckPassword"
+                    android:hint="Enter Password"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="20dp"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:ems="15"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </RelativeLayout>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Log in"
-            android:layout_below="@id/edtTxtCheckPassword"
+            android:layout_below="@id/checkPasswordRelLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:id="@+id/btnLogIn"

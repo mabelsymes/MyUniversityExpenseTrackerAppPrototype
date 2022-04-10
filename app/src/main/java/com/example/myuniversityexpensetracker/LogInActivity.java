@@ -1,6 +1,7 @@
 package com.example.myuniversityexpensetracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,14 +21,16 @@ import java.util.ArrayList;
 public class LogInActivity extends AppCompatActivity {
 
     // Test Commit
-
+    private static final String TAG = "LoginActivity";
     int accountId;
     Button btnLogIn;
+    //ImageView btnChangePasswordView;
     EditText edtTxtCheckPassword;
     TextView txtAccountName;
     String realPassword;
     Account account;
     Boolean deleteAccount;
+    //Boolean eyeOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +72,12 @@ public class LogInActivity extends AppCompatActivity {
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Log.d(TAG, "onClick: About to use Utils");
                                 Utils.getInstance(LogInActivity.this).removeAccount(account);
+                                Log.d(TAG, "onClick: After Utils");
                                 Toast.makeText(LogInActivity.this, "Account Removed", Toast.LENGTH_SHORT).show();
                                 ArrayList<Account> accounts = Utils.getInstance(LogInActivity.this).getAccounts();
+                                Log.d(TAG, "onClick: Before Intent");
                                 Intent intent = new Intent(LogInActivity.this, ChooseAccountActivity.class);
                                 startActivity(intent);
                             }
@@ -98,6 +105,27 @@ public class LogInActivity extends AppCompatActivity {
         btnLogIn = findViewById(R.id.btnLogIn);
         edtTxtCheckPassword = findViewById(R.id.edtTxtCheckPassword);
         txtAccountName = findViewById(R.id.txtAccountName);
+
+        // ------------------ Eye code which I might delete ---------------------
+
+//        btnChangePasswordView = findViewById(R.id.btnChangePasswordView);
+//
+//        btnChangePasswordView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG, "onClick: Eye clicked");
+//                if (eyeOpen == false) {
+//                    // Got from stack overflow, should change tint of image
+//                    btnChangePasswordView.setColorFilter(ContextCompat.getColor(LogInActivity.this,R.color.red));
+//                    eyeOpen = true;
+//                } else {
+//                    btnChangePasswordView.setColorFilter(ContextCompat.getColor(LogInActivity.this, R.color.black));
+//                    eyeOpen = false;
+//                }
+//
+//            }
+//        });
+
     }
 
 
