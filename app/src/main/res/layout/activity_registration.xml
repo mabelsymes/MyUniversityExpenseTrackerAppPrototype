@@ -45,7 +45,6 @@
                 android:hint="Enter First Name"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="20dp"
-                android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:ems="15"
                 />
@@ -67,7 +66,6 @@
                 android:hint="Enter Last Name"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="20dp"
-                android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:ems="15"
                 />
