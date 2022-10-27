@@ -15,14 +15,13 @@ import java.util.ArrayList;
 public class Account{
 
     private static final String TAG = "Account Stuff";
-    private static final String SHORT_EVENTS_KEY = "short_events_list";
 
     private int id;
     private String firstName;
     private String lastName;
     private String password;
-    private ArrayList<Event> shortEvents = new ArrayList<>();
-    private ArrayList<Event> longEvents = new ArrayList<>();
+    private ArrayList<Event> shortEvents;
+    private ArrayList<Event> longEvents;
     private ArrayList<Double> allIncomes;
     private ArrayList<Double> allOutgoings;
     private ArrayList<ArrayList> newIncomes;
@@ -74,7 +73,6 @@ public class Account{
 
         this.allIncomes = tempAllIncomes;
         this.allOutgoings = tempAllOutgoings;
-        Log.d(TAG, "Account: allIncomes length: " + allIncomes.size());
     }
 
     public Event getShortEventByID(int id) {
@@ -149,38 +147,6 @@ public class Account{
         this.budgetDuration = budgetDuration;
     }
 
-    public Boolean getIncomeNull() {
-        return incomeNull;
-    }
-
-    public void setIncomeNull(Boolean incomeNull) {
-        this.incomeNull = incomeNull;
-    }
-
-    public Boolean getOutgoingNull() {
-        return outgoingNull;
-    }
-
-    public void setOutgoingNull(Boolean outgoingNull) {
-        this.outgoingNull = outgoingNull;
-    }
-
-    public ArrayList<ArrayList> getNewIncomes() {
-        return newIncomes;
-    }
-
-    public void setNewIncomes(ArrayList<ArrayList> newIncomes) {
-        this.newIncomes = newIncomes;
-    }
-
-    public ArrayList<ArrayList> getNewOutgoings() {
-        return newOutgoings;
-    }
-
-    public void setNewOutgoings(ArrayList<ArrayList> newOutgoings) {
-        this.newOutgoings = newOutgoings;
-    }
-
     public ArrayList<Double> getAllIncomes() {
         return allIncomes;
     }
@@ -225,23 +191,11 @@ public class Account{
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

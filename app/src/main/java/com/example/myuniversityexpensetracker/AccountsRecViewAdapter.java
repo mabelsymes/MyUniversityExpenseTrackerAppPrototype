@@ -40,7 +40,6 @@ public class AccountsRecViewAdapter extends RecyclerView.Adapter<AccountsRecView
 
     @Override
     public void onBindViewHolder(@NonNull AccountsRecViewAdapter.ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: Called");
         holder.txtFullName.setText(accounts.get(position).getFirstName() + " " + accounts.get(position).getLastName());
 
         // Moves user to their main page when their name is clicked
@@ -48,7 +47,6 @@ public class AccountsRecViewAdapter extends RecyclerView.Adapter<AccountsRecView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,LogInActivity.class);
-                Log.d(TAG, "onClick: accountId in AccountsRecViewAdapter is " + accounts.get(position).getId());
                 intent.putExtra("accountId", accounts.get(position).getId());
                 intent.putExtra("deleteAccount", false);
                 mContext.startActivity(intent);

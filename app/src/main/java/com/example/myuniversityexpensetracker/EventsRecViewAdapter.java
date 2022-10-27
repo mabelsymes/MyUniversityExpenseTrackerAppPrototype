@@ -46,8 +46,6 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull EventsRecViewAdapter.ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: Event name: " + events.get(position).getEventName());
-        Log.d(TAG, "onBindViewHolder: Event Id: " + events.get(position).getId());
         holder.eventName.setText(events.get(position).getEventName());
         holder.eventCategory.setText(events.get(position).getCategory());
         String date = String.valueOf(events.get(position).getDay()) + "/" + String.valueOf(events.get(position).getMonth()) + "/" + String.valueOf(events.get(position).getYear());
@@ -61,9 +59,7 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
         holder.description.setText(events.get(position).getDescription());
 
         if (events.get(position).isExpanded()) {
-            Log.d(TAG, "onBindViewHolder: Whee");
             if (events.get(position).isLongTerm()) {
-                Log.d(TAG, "onBindViewHolder: Hereeeee");
                 holder.repeatPeriodTxt.setVisibility(View.VISIBLE);
                 holder.txtRepeatPeriod.setVisibility(View.VISIBLE);
                 holder.txtRepeatPeriod.setText(String.valueOf(events.get(position).getRepeatNum()) + " " + events.get(position).getRepeatPeriod());
@@ -94,14 +90,12 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
                         if (events.get(position).isLongTerm()) {
                             Utils.getInstance(eContext).removeLongEvent(events.get(position), incomingAccount);
                             Toast.makeText(eContext, "Event Removed", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "Event deleted");
                             ArrayList<Event> events = Utils.getInstance(eContext).getLongEvents(incomingAccount);
                             setEvents(events);
                             notifyDataSetChanged();
                         } else {
                             Utils.getInstance(eContext).removeShortEvent(events.get(position), incomingAccount);
                             Toast.makeText(eContext, "Event Removed", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "Event deleted");
                             ArrayList<Event> events = Utils.getInstance(eContext).getShortEvents(incomingAccount);
                             setEvents(events);
                             notifyDataSetChanged();
@@ -117,7 +111,6 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
             @Override
             public void onClick(View v) {
                 if (events.get(position).isLongTerm()) {
-                    Log.d(TAG, "onClick: Editing long event");
                     Intent intent = new Intent(eContext, AddNewLongEventActivity.class);
                     intent.putExtra("accountId", accountId);
                     intent.putExtra("editEvent", true);
@@ -169,7 +162,6 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
             downArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick: Down Arrow Clicked");
                     Event event = events.get(getAdapterPosition());
                     event.setExpanded(!event.isExpanded());
                     notifyItemChanged(getAdapterPosition());
@@ -188,27 +180,21 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
     }
 
     public void addShortEvent(Event event, Account account){
-        Log.d(TAG, "addShortEvent: Before getting instance");
         Utils.getInstance(eContext).addShortEvent(event, account);
-        Log.d(TAG, "addShortEvent: After getting instance");
         notifyDataSetChanged();
     }
 
     public void addLongEvent(Event event, Account account){
-        Log.d(TAG, "addLongEvent: Before getting instance");
         Utils.getInstance(eContext).addLongEvent(event, account);
-        Log.d(TAG, "addLongEvent: After getting instance");
         notifyDataSetChanged();
     }
 
     public void editShortEvent(Event newShortEvent, Account account, int shortEventId) {
-        Log.d(TAG, "editShortEvent: About to call Utils' editShortEvent function");
         Utils.getInstance(eContext).editShortEvent(newShortEvent, account, shortEventId);
         notifyDataSetChanged();
     }
 
     public void editLongEvent(Event newLongEvent, Account account, int longEventId) {
-        Log.d(TAG, "editShortEvent: About to call Utils' editShortEvent function");
         Utils.getInstance(eContext).editLongEvent(newLongEvent, account, longEventId);
         notifyDataSetChanged();
     }
@@ -217,27 +203,7 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
         return TAG;
     }
 
-    public ArrayList<Event> getEvents() {
-        return events;
-    }
-
     public void setEvents(ArrayList<Event> events) {
         this.events = events;
-    }
-
-    public Context geteContext() {
-        return eContext;
-    }
-
-    public void seteContext(Context eContext) {
-        this.eContext = eContext;
-    }
-
-    public String getParentActivity() {
-        return parentActivity;
-    }
-
-    public void setParentActivity(String parentActivity) {
-        this.parentActivity = parentActivity;
     }
 }

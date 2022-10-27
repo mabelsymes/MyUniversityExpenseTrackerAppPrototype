@@ -45,19 +45,15 @@ public class RegistrationActivity extends AppCompatActivity {
                 Boolean ok = true;
                 if (edtTxtFirstName.getText().toString().equals("")){
                     ok = false;
-                    System.out.println("First name not entered");
                 }
                 if (edtTxtLastName.getText().toString().equals("")){
                     ok = false;
-                    System.out.println("Last name not entered");
                 }
                 if (edtTxtPassword1.getText().toString().equals("")){
                     ok = false;
-                    System.out.println("Password not entered");
                 }
                 if (!(edtTxtPassword1.getText().toString().equals(edtTxtPassword2.getText().toString()))){
                     ok = false;
-                    System.out.println("Passwords not equal");
                 }
 
                 if (ok) {
@@ -71,45 +67,5 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public EditText getEdtTxtFirstName() {
-        return edtTxtFirstName;
-    }
-
-    public void setEdtTxtFirstName(EditText edtTxtFirstName) {
-        this.edtTxtFirstName = edtTxtFirstName;
-    }
-
-    public EditText getEdtTxtLastName() {
-        return edtTxtLastName;
-    }
-
-    public void setEdtTxtLastName(EditText edtTxtLastName) {
-        this.edtTxtLastName = edtTxtLastName;
-    }
-
-    public EditText getEdtTxtPassword1() {
-        return edtTxtPassword1;
-    }
-
-    public void setEdtTxtPassword1(EditText edtTxtPassword1) {
-        this.edtTxtPassword1 = edtTxtPassword1;
-    }
-
-    public EditText getEdtTxtPassword2() {
-        return edtTxtPassword2;
-    }
-
-    public void setEdtTxtPassword2(EditText edtTxtPassword2) {
-        this.edtTxtPassword2 = edtTxtPassword2;
-    }
-
-    public Button getBtnRegister() {
-        return btnRegister;
-    }
-
-    public void setBtnRegister(Button btnRegister) {
-        this.btnRegister = btnRegister;
     }
 }

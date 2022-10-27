@@ -57,8 +57,6 @@ public class ShortEventsActivity extends AppCompatActivity {
         adapter = new EventsRecViewAdapter(this, "shortEvents", incomingAccount, accountId);
         shortActivitiesRecView.setAdapter(adapter);
         shortActivitiesRecView.setLayoutManager(new LinearLayoutManager(this));
-
-        Log.d(TAG, "onCreate: The Events List is: ");
         adapter.setEvents(events);
 
         btnAddNewShortActivity.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +99,5 @@ public class ShortEventsActivity extends AppCompatActivity {
 
     private void setData(Account incomingAccount) {
         events = Utils.getInstance(ShortEventsActivity.this).getShortEvents(incomingAccount);
-//        events.add(new Event(2, "Part time Job", "Delivery Job", true, 500, "Deliveroo", true));
     }
 }

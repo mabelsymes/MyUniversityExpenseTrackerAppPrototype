@@ -35,7 +35,6 @@ public class ChooseAccountActivity extends AppCompatActivity {
         accountsRecView.setAdapter(adapter);
         accountsRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        Log.d(TAG, "onCreate: Adapter.setAccounts");
         adapter.setAccounts(Utils.getInstance(this).getAccounts());
 
         btnAddNewAccount.setOnClickListener(new View.OnClickListener() {

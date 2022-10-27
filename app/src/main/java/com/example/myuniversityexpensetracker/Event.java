@@ -29,24 +29,12 @@ public class Event {
         return day;
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
-
     public int getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
     public int getYear() {
         return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 
     public boolean isExpanded() {
@@ -61,16 +49,8 @@ public class Event {
         return eventName;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
     public boolean isLongTerm() {
         return longTerm;
-    }
-
-    public void setLongTerm(boolean longTerm) {
-        this.longTerm = longTerm;
     }
 
     public int getId() {
@@ -85,47 +65,23 @@ public class Event {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public boolean isIncome() {
         return income;
-    }
-
-    public void setIncome(boolean income) {
-        this.income = income;
     }
 
     public double getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getRepeatNum() {
         return repeatNum;
     }
 
-    public void setRepeatNum(int repeatNum) {
-        this.repeatNum = repeatNum;
-    }
-
     public String getRepeatPeriod() {
         return repeatPeriod;
-    }
-
-    public void setRepeatPeriod(String repeatPeriod) {
-        this.repeatPeriod = repeatPeriod;
     }
 }

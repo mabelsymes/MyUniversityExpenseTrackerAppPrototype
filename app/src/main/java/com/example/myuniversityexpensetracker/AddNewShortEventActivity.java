@@ -43,7 +43,7 @@ public class AddNewShortEventActivity extends AppCompatActivity {
     private Boolean income, allEntered;
     private ArrayAdapter<String> shortCategoriesAdapter, incomeOutcomeAdapter;
 
-    // For the edit event stuff
+    // For when the event is being edited
     private int shortEventId;
     private Boolean editEvent;
     private Event currentShortEvent;
@@ -142,7 +142,6 @@ public class AddNewShortEventActivity extends AppCompatActivity {
                 currentShortEvent = Utils.getInstance(AddNewShortEventActivity.this).getShortEventByID(incomingAccount, shortEventId);
 
                 // Sets the data according to the short event selected
-                Log.d(TAG, "onCreate: About to set categories spinner");
                 shortCategoriesSpinner.setSelection(shortCategoriesAdapter.getPosition(currentShortEvent.getCategory()));
                 if (currentShortEvent.isIncome()) {
                     shortIncomeOutcomeSpinner.setSelection(1);
@@ -171,9 +170,7 @@ public class AddNewShortEventActivity extends AppCompatActivity {
         btnAddShortActivityConfirmed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: Button Pressed");
-
-                 if (checkEntered()) {
+                if (checkEntered()) {
                      // Chooses new Id for short event
                      int position = incomingAccount.getShortEvents().size();
                      if (position == 0 || position == -1) {
@@ -198,10 +195,8 @@ public class AddNewShortEventActivity extends AppCompatActivity {
                      description = edtTxtShortEventDesc.getText().toString();
 
                      if (editEvent) {
-                         Log.d(TAG, "onClick: editEvent is true");
                          Event event = new Event(newId,selectedDay,selectedMonth,selectedYear,category,eventName,income,money,description,false, 0, "None");
                          EventsRecViewAdapter eventsRecViewAdapter = new EventsRecViewAdapter(AddNewShortEventActivity.this, "AddNewShortEvent", incomingAccount, accountId);
-                         Log.d(TAG, "onClick: About to call eventsRecViewAdapter thing");
                          eventsRecViewAdapter.editShortEvent(event, incomingAccount, shortEventId);
                      } else {
                          // Adds short event

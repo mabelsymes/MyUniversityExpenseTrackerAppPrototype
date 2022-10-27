@@ -27,13 +27,10 @@ import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO find out about the flag thing to fix security
-    // TODO Fix all of the confusing month stuff
     private static final String TAG = "MainActivityLogStuff";
     TextView txtFullName, txtTopIncome, txtSecondTopIncome, txtThirdTopIncome, txtTopOutgoing, txtSecondTopOutgoing, txtThirdTopOutgoing;
     TextView txtTotalBalance, txtTotalIncome, txtTotalOutgoing, txtBudget, budgetText, txtBudgetRemaining;
     Button btnSwitchAccount, btnEditShortEvents, btnEditLongEvents, btnChangeBudget;
-    SQLiteDatabase myDatabase;
     ArrayList<Double> incomes;
     ArrayList<Double> outgoings;
     ArrayList<Double> totalBalances;
@@ -135,27 +132,21 @@ public class MainActivity extends AppCompatActivity {
         int budgetDuration = account.getBudgetDuration();
         double budgetMoney = account.getBudgetAmount();
 
-        Log.d(TAG, "setData: Budget time period is: " + budgetTimePeriod);
         int budgetDay = account.getBudgetDay();
         int budgetMonth = account.getBudgetMonth();
-        Log.d(TAG, "setData: budgetMonth is: " + budgetMonth);
         int budgetYear = account.getBudgetYear();
+
         // Calculates date of when budget begins (most recently)
         if (budgetTimePeriod.equals("Day(s)") || budgetTimePeriod.equals("Week(s)")) {
-            Log.d(TAG, "setData: Days or Weeks for Budget");
             int toAdd = 1;
             if (budgetTimePeriod.equals("Day(s)")) {
                 toAdd = 1 * budgetDuration;
             } else {
                 toAdd = 7 * budgetDuration;
             }
-            Log.d(TAG, "setData: toAdd is: " + toAdd);
-
             // For calculating budget day
             while (true){
-
-                Log.d(TAG, "setData: inside loop");
-                // Sets how many days are in the current budgetMonth
+                 // Sets how many days are in the current budgetMonth
                 int daysInCurrentMonth;
                 if (budgetMonth == 1 || budgetMonth == 3 || budgetMonth == 5 || budgetMonth == 7 || budgetMonth == 8 || budgetMonth == 10) {
                     daysInCurrentMonth = 31;
@@ -168,37 +159,27 @@ public class MainActivity extends AppCompatActivity {
                         daysInCurrentMonth = 28;
                     }
                 }
-
-                Log.d(TAG, "setData: Days in current month is: " + daysInCurrentMonth);
-
                 // Adds 1 (or 7) days and edits date
                 if (budgetDay + toAdd <= daysInCurrentMonth) {
-                    Log.d(TAG, "setData: Budget day smaller");
                     if (Utils.getInstance(MainActivity.this).isAfter(budgetDay + toAdd,budgetMonth,budgetYear,day,month+1,year)) {
                         break;
                     }
                     budgetDay += toAdd;
-                    Log.d(TAG, "setData: BudgetDay is now: " + budgetDay);
                 } else {
                     // If it is december, the year will have to change as well
                     if (budgetMonth < 12) {
-                        Log.d(TAG, "setData: notDecember");
                         if (Utils.getInstance(MainActivity.this).isAfter(toAdd - (daysInCurrentMonth - budgetDay), budgetMonth + 1, budgetYear, day, month+1, year)) {
                             break;
                         }
                         budgetDay = toAdd - (daysInCurrentMonth - budgetDay);
                         budgetMonth += 1;
-                        Log.d(TAG, "setData: budget day is now: " + budgetDay);
-                        Log.d(TAG, "setData: budgetMonth is now: " + budgetMoney);
                     } else {
-                        Log.d(TAG, "setData: December");
                         if (Utils.getInstance(MainActivity.this).isAfter(toAdd - (daysInCurrentMonth - budgetDay), 1, budgetYear + 1, day, month+1, year)) {
                             break;
                         }
                         budgetDay = toAdd - (daysInCurrentMonth - budgetDay);
                         budgetMonth = 1;
                         budgetYear += 1;
-                        Log.d(TAG, "setData: budgetDay is now: " + budgetDay);
                     }
                 }
             }
@@ -226,8 +207,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Log.d(TAG, "setData: Budget date: " + budgetDay + " " + budgetMonth + " " + budgetYear);
-
         for (Event e: account.getLongEvents()) {
             if (!e.isIncome()) {
                 budgetMoney -= moneyDuringBudget(budgetDay,budgetMonth,budgetYear,e.getDay(),e.getMonth(),e.getYear(),e.getRepeatPeriod(),e.getRepeatNum(),e.getMoney(),day, month, year);
@@ -236,13 +215,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         for (Event e: account.getShortEvents()) {
-            Log.d(TAG, "setData: In loop");
             if (!e.isIncome()) {
-                Log.d(TAG, "setData: Outgoing");
                 if (Utils.getInstance(MainActivity.this).isAfter(e.getDay(),e.getMonth()+1,e.getYear(),budgetDay,budgetMonth,budgetYear)){
-                    Log.d(TAG, "setData: After");
                     if (Utils.getInstance(MainActivity.this).isBefore(e.getDay(),e.getMonth()+1,e.getYear(),day,month+1,year)){
-                        Log.d(TAG, "setData: Before");
                         budgetMoney -= e.getMoney();
                     }
                 }
@@ -250,8 +225,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         txtBudgetRemaining.setText(String.valueOf(budgetMoney));
-//        txtBudgetRemaining.setText(String.valueOf(budgetDay) + " " + String.valueOf(budgetMonth) + " " + String.valueOf(budgetYear));
-
 
         double highestIncome;
         String IncomeCat1;
@@ -273,21 +246,12 @@ public class MainActivity extends AppCompatActivity {
         outgoings = account.getAllOutgoings();
 
         // Only uses events up to the current date
-        Log.d(TAG, "setData: Month is " + month);
         totalBalances = Utils.getInstance(MainActivity.this).getTotalBalances(account, day, month, year);
 
         txtTotalBalance.setText(String.valueOf(totalBalances.get(0)));
         txtTotalIncome.setText(String.valueOf(totalBalances.get(1)));
         txtTotalOutgoing.setText(String.valueOf(totalBalances.get(2)));
 
-//        int testingNewIncome = 0;
-//        ArrayList<ArrayList> newIncomes = account.getNewIncomes();
-//        Log.d(TAG, "setData: Before");
-//        if (account.getIncomeNull() == false) {
-//            Log.d(TAG, "setData: NewIncomes is not null");
-//            testingNewIncome = Integer.valueOf(String.valueOf(newIncomes.get(0).get(0)));
-//        }
-        
         ArrayList<String> incomePossibilities = Utils.getInstance(MainActivity.this).getPossibleIncomes();
         ArrayList<String> outgoingPossibilities = Utils.getInstance(MainActivity.this).getPossibleOutgoings();
         
@@ -311,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Log.d(TAG, "setData: Month is " + month);
         for (Event e: account.getLongEvents()) {
             int position = 0;
             if (e.isIncome()) {
@@ -325,8 +288,6 @@ public class MainActivity extends AppCompatActivity {
 
         incomes = currentIncomes;
         outgoings = currentOutgoings;
-
-        Log.d(TAG, "setData: No errors yet");
 
         highestIncome = Collections.max(incomes);
         pos = incomes.indexOf(highestIncome);
@@ -347,7 +308,6 @@ public class MainActivity extends AppCompatActivity {
         possibleIncomes.remove(pos);
 
         highestOutgoing = Collections.max(outgoings);
-        Log.d(TAG, "setData: Highest Outgoing: " + highestOutgoing);
         pos = outgoings.indexOf(highestOutgoing);
         OutgoingCat1 = possibleOutgoings.get(pos);
         outgoings.remove(pos);
@@ -366,7 +326,6 @@ public class MainActivity extends AppCompatActivity {
         possibleOutgoings.remove(pos);
 
         txtTopIncome.setText(IncomeCat1 + ": " + String.valueOf(highestIncome));
-//        txtTopIncome.setText(String.valueOf(testingNewIncome));
         txtSecondTopIncome.setText(IncomeCat2 + ": " + String.valueOf(highest2Income));
         txtThirdTopIncome.setText(IncomeCat3 + ": " + String.valueOf(highest3Income));
         txtTopOutgoing.setText(OutgoingCat1 + ": " + String.valueOf(highestOutgoing));
@@ -389,7 +348,6 @@ public class MainActivity extends AppCompatActivity {
         txtTotalBalance = findViewById(R.id.txtTotalBalance);
         txtTotalIncome = findViewById(R.id.txtTotalIncomes);
         txtTotalOutgoing = findViewById(R.id.txtTotalOutgoings);
-        //TODO finish budget thing
         btnChangeBudget = findViewById(R.id.btnChangeBudget);
         txtBudget = findViewById(R.id.txtBudget);
         budgetText = findViewById(R.id.budgetText);
@@ -397,8 +355,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setStartingPossibleIncomesAndOutgoings () {
-
-        // after one means Means long term
 
         ArrayList<String> incomePossibilities = new ArrayList<>();
         incomePossibilities.add("Salary"); //
@@ -459,19 +415,15 @@ public class MainActivity extends AppCompatActivity {
         double endTotal = 0.0;
 
         if (eTimePeriod.equals("Day(s)") || eTimePeriod.equals("Week(s)")) {
-            Log.d(TAG, "moneyDuringBudget: Days or weeks for event");
             int toAdd = 1;
             if (eTimePeriod.equals("Day(s)")) {
                 toAdd = 1 * eDuration;
             } else {
                 toAdd = 7 * eDuration;
             }
-            Log.d(TAG, "moneyDuringBudget: toAdd is: " + toAdd);
 
             // For calculating days which are after budgetDate but before current date
             while (true){
-
-                Log.d(TAG, "moneyDuringBudget: inside loop");
                 // Sets how many days are in the current eMonth
                 int daysInCurrentMonth;
                 if (eMonth == 1 || eMonth == 3 || eMonth == 5 || eMonth == 7 || eMonth == 8 || eMonth == 10) {
@@ -485,44 +437,34 @@ public class MainActivity extends AppCompatActivity {
                         daysInCurrentMonth = 28;
                     }
                 }
-
-                Log.d(TAG, "moneyDuringBudget: Days in current month is: " + daysInCurrentMonth);
-
                 // Adds 1 (or 7) days and edits date
                 if (eDay + toAdd <= daysInCurrentMonth) {
-                    Log.d(TAG, "setData: Budget day smaller");
                     if (Utils.getInstance(MainActivity.this).isAfter(eDay + toAdd, eMonth, eYear ,day,month+1,year)) {
                         break;
                     }
                     eDay += toAdd;
-                    Log.d(TAG, "moneyDuringBudget: BudgetDay is now: " + budgetDay);
                     if (Utils.getInstance(MainActivity.this).isAfter(eDay, eMonth, eYear ,budgetDay, budgetMonth, budgetYear)) {
                        endTotal += eMoney;
                     }
                 } else {
                     // If it is december, the year will have to change as well
                     if (eMonth < 12) {
-                        Log.d(TAG, "moneyDuringBudget: notDecember");
                         if (Utils.getInstance(MainActivity.this).isAfter(toAdd - (daysInCurrentMonth - eDay), eMonth + 1, eYear, day, month+1, year)) {
                             break;
                         }
                         eDay = toAdd - (daysInCurrentMonth - eDay);
                         eMonth += 1;
-                        Log.d(TAG, "setData: e day is now: " + eDay);
-                        Log.d(TAG, "setData: eMonth is now: " + eMonth);
 
                         if (Utils.getInstance(MainActivity.this).isAfter(eDay, eMonth, eYear ,budgetDay, budgetMonth, budgetYear)) {
                             endTotal += eMoney;
                         }
                     } else {
-                        Log.d(TAG, "moneyDuringBudget: December");
                         if (Utils.getInstance(MainActivity.this).isAfter(toAdd - (daysInCurrentMonth - eDay), 1, eYear + 1, day, month+1, year)) {
                             break;
                         }
                         eDay = toAdd - (daysInCurrentMonth - eDay);
                         eMonth = 1;
                         eYear += 1;
-                        Log.d(TAG, "setData: eDay is now: " + eDay);
 
                         if (Utils.getInstance(MainActivity.this).isAfter(eDay, eMonth, eYear ,budgetDay, budgetMonth, budgetYear)) {
                             endTotal += eMoney;

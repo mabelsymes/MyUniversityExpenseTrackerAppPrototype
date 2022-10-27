@@ -55,7 +55,6 @@ public class LongEventsActivity extends AppCompatActivity {
         longActivitiesRecView.setAdapter(adapter);
         longActivitiesRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        Log.d(TAG, "onCreate: The Events List is: ");
         adapter.setEvents(events);
 
         btnAddNewLongActivity.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +97,5 @@ public class LongEventsActivity extends AppCompatActivity {
 
     private void setData(Account incomingAccount) {
         events = Utils.getInstance(LongEventsActivity.this).getLongEvents(incomingAccount);
-//        events.add(new Event(2, "Part time Job", "Delivery Job", true, 500, "Deliveroo", true));
     }
 }

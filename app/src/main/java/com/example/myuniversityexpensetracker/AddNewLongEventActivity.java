@@ -36,7 +36,7 @@ public class AddNewLongEventActivity extends AppCompatActivity {
     private Boolean income, allEntered;
     private ArrayAdapter<String> longCategoriesAdapter, incomeOutcomeAdapter, repetitionPeriodsAdapter;
 
-    // For the edit event stuff
+    // For when an event is being edited
     private int longEventId;
     private Boolean editEvent;
     private Event currentLongEvent;
@@ -79,7 +79,6 @@ public class AddNewLongEventActivity extends AppCompatActivity {
             }
         });
 
-        // Edit this later to long categories
         ArrayList<String> LongCategories = new ArrayList<>();
         LongCategories.add("Salary");
         LongCategories.add("Wages");
@@ -151,19 +150,16 @@ public class AddNewLongEventActivity extends AppCompatActivity {
                 currentLongEvent = Utils.getInstance(AddNewLongEventActivity.this).getLongEventByID(incomingAccount, longEventId);
 
                 // Sets the data according to the Long event selected
-                Log.d(TAG, "onCreate: About to set categories spinner");
                 longCategoriesSpinner.setSelection(longCategoriesAdapter.getPosition(currentLongEvent.getCategory()));
                 repetitionOptionsSpinner.setSelection(repetitionPeriodsAdapter.getPosition(currentLongEvent.getRepeatPeriod()));
                 if (currentLongEvent.isIncome()) {
                     longIncomeOutcomeSpinner.setSelection(1);
                 }
-                Log.d(TAG, "onCreate: About to set text stuff");
                 edtTxtLongEventName.setText(currentLongEvent.getEventName());
                 edtTxtLongEventMoney.setText(String.valueOf(currentLongEvent.getMoney()));
                 edtTxtLongRepetition.setText(String.valueOf(currentLongEvent.getRepeatNum()));
                 edtTxtLongEventDesc.setText(currentLongEvent.getDescription());
                 String date = String.valueOf(currentLongEvent.getDay()) + "/" + String.valueOf(currentLongEvent.getMonth()) + "/" + String.valueOf(currentLongEvent.getYear());
-                Log.d(TAG, "onCreate: Month is: " + currentLongEvent.getMonth());
                 txtLongDate.setText(date);
                 selectedDay = currentLongEvent.getDay();
                 selectedMonth = currentLongEvent.getMonth();
@@ -185,8 +181,6 @@ public class AddNewLongEventActivity extends AppCompatActivity {
         btnAddLongActivityConfirmed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: Button Pressed");
-
                 if (checkEntered()) {
                     // Chooses new Id for Long event
                     int position = incomingAccount.getLongEvents().size();
@@ -213,17 +207,13 @@ public class AddNewLongEventActivity extends AppCompatActivity {
 
                     repeatNum = Integer.valueOf(edtTxtLongRepetition.getText().toString());
                     repeatPeriod = repetitionOptionsSpinner.getSelectedItem().toString();
-                    Log.d(TAG, "onClick: repeat period: " + repeatPeriod);
 
                     if (editEvent) {
-                        Log.d(TAG, "onClick: editEvent is true");
                         Event event = new Event(newId,selectedDay,selectedMonth,selectedYear,category,eventName,income,money,description,true, repeatNum, repeatPeriod);
                         EventsRecViewAdapter eventsRecViewAdapter = new EventsRecViewAdapter(AddNewLongEventActivity.this, "AddNewLongEvent", incomingAccount, accountId);
-                        Log.d(TAG, "onClick: About to call eventsRecViewAdapter thing");
                         eventsRecViewAdapter.editLongEvent(event, incomingAccount, longEventId);
                     } else {
                         Event event = new Event(newId,selectedDay,selectedMonth,selectedYear,category,eventName,income,money,description,true, repeatNum, repeatPeriod);
-                        Log.d(TAG, "onClick: Selected Month is: " + selectedMonth);
                         EventsRecViewAdapter eventsRecViewAdapter = new EventsRecViewAdapter(AddNewLongEventActivity.this, "AddNewLongEvent", incomingAccount, accountId);
                         eventsRecViewAdapter.addLongEvent(event, incomingAccount);
                         Toast.makeText(AddNewLongEventActivity.this, "New Long Event Successfully added", Toast.LENGTH_SHORT).show();

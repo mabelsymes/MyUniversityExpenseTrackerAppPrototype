@@ -20,7 +20,6 @@ import java.time.temporal.ChronoUnit;
 public class Utils {
 
     private static final String ALL_ACCOUNTS_KEY = "accounts_list";
-    private static final String SHORT_EVENTS_KEY = "short_events_list";
 
     private static final String TAG = "Utils Stuff";
 
@@ -33,17 +32,10 @@ public class Utils {
     // Sets sharedPreferences and Editor
     private Utils(Context context) {
 
-        Log.d(TAG, "Utils: 1");
         setStartingPossibleIncomesAndOutgoings();
-
-        Log.d(TAG, "Utils: 2");
         sharedPreferences = context.getSharedPreferences("database", Context.MODE_PRIVATE);
-
-        Log.d(TAG, "Utils: 3");
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-
-        Log.d(TAG, "Utils: 3");
         if (null == getAccounts()) {
             editor.putString(ALL_ACCOUNTS_KEY, gson.toJson(new ArrayList<Account>(5)));
             editor.commit();
@@ -65,9 +57,7 @@ public class Utils {
     public ArrayList<Account> getAccounts() {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<Account>>() {}.getType();
-        Log.d(TAG, "getAccounts: 44");
         ArrayList<Account> accounts = gson.fromJson(sharedPreferences.getString(ALL_ACCOUNTS_KEY, null), type);
-        Log.d(TAG, "getAccounts: 5");
         return accounts;
     }
 
@@ -157,7 +147,6 @@ public class Utils {
         if (null != accounts) {
             for (Account a: accounts) {
                 if (a.getId() == id) {
-                    Log.d(TAG, "getAccountByID: Found it!!!");
                     return(a);
                 }
             }
@@ -186,7 +175,6 @@ public class Utils {
 
         // Changes event
         ArrayList<Event> shortEvents = getShortEvents(account);
-        Log.d(TAG, "editShortEvent: Length of short Events: " + shortEvents.size());
 
         Event toUseShortEvent = null;
         if (null != shortEvents) {
@@ -200,104 +188,60 @@ public class Utils {
         int eventPosition = shortEvents.indexOf(toUseShortEvent);
 
         // Subtracts money from correct category
-        Log.d(TAG, "editShortEvent: Subtracting money");
         Event oldShortEvent = shortEvents.get(eventPosition);
         String category = oldShortEvent.getCategory();
         ArrayList<Double> updatedIncomes;
         ArrayList<Double> updatedOutgoings;
-//        ArrayList<ArrayList> updatedNewIncomes;
-//        ArrayList<ArrayList> updatedNewOutgoings;
         updatedIncomes = account.getAllIncomes();
         updatedOutgoings = account.getAllOutgoings();
 
         int incomePosition = -1;
         int outgoingPosition = -1;
         if (oldShortEvent.isIncome()) {
-            Log.d(TAG, "addShortEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addShortEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
 
         if (incomePosition >= 0)    {
-
-            // Edited income stuff
-//            int oldShortEventId = oldShortEvent.getId();
-//            for (Object o: updatedIncomes.get(incomePosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldShortEventId) {
-//                    updatedIncomes.get(incomePosition).remove(id);
-//                }
-//            }
-
             double currentAmount = updatedIncomes.get(incomePosition);
-            Log.d(TAG, "editShortEvent: Subtracting income money: " + currentAmount);
             currentAmount = currentAmount - oldShortEvent.getMoney();
-            Log.d(TAG, "editShortEvent: Final income money: " + currentAmount);
             updatedIncomes.set(incomePosition, currentAmount);
         } else if (outgoingPosition >= 0) {
-//            int oldShortEventId = oldShortEvent.getId();
-//            for (Object o: updatedOutgoings.get(outgoingPosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldShortEventId) {
-//                    updatedOutgoings.get(outgoingPosition).remove(id);
-//                }
-//            }
-
             double currentAmount = updatedOutgoings.get(outgoingPosition);
-            Log.d(TAG, "editShortEvent: Subtracting outgoing money: " + currentAmount);
             currentAmount = currentAmount - oldShortEvent.getMoney();
-            Log.d(TAG, "editShortEvent: Final outgoing money: " + currentAmount);
             updatedOutgoings.set(outgoingPosition, currentAmount);
         }
 
         // Changes event
-        Log.d(TAG, "editShortEvent: Changes event");
         shortEvents.set(eventPosition, newShortEvent);
 
         // Adds money to correct category
-        Log.d(TAG, "addShortEvent: Getting category");
         category = newShortEvent.getCategory();
-        int newShortEventId = newShortEvent.getId();
-
         incomePosition = -1;
         outgoingPosition = -1;
+
         if (newShortEvent.isIncome()) {
-            Log.d(TAG, "addShortEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addShortEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
 
         if (incomePosition >= 0)    {
-//            updatedIncomes.get(incomePosition).add(newShortEventId);
-
             double currentAmount = updatedIncomes.get(incomePosition);
-            Log.d(TAG, "editShortEvent: Adding income money: " + currentAmount);
             currentAmount = currentAmount + newShortEvent.getMoney();
-            Log.d(TAG, "editShortEvent: Final income money: " + currentAmount);
             updatedIncomes.set(incomePosition, currentAmount);
         } else if (outgoingPosition >= 0) {
-//            updatedOutgoings.get(outgoingPosition).add(newShortEventId);
-
             double currentAmount = updatedOutgoings.get(outgoingPosition);
-            Log.d(TAG, "editShortEvent: Adding outgoing money: " + currentAmount);
             currentAmount = currentAmount + newShortEvent.getMoney();
-            Log.d(TAG, "editShortEvent: Final outgoing money: " + currentAmount);
             updatedOutgoings.set(outgoingPosition, currentAmount);
         }
 
@@ -314,7 +258,6 @@ public class Utils {
             }
         }
 
-        Log.d(TAG, "editShortEvent: Updates shortEvents list");
         int position = accounts.indexOf(toChangeAccount);
         accounts.get(position).setShortEvents(shortEvents);
         accounts.get(position).setAllIncomes(updatedIncomes);
@@ -323,9 +266,7 @@ public class Utils {
         // Updates Shared Preferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        Log.d(TAG, "editShortEvent: PutString");
         editor.putString(ALL_ACCOUNTS_KEY, gson.toJson(accounts));
-        Log.d(TAG, "editShortEvent: COMMIT!!!");
         editor.commit();
     }
 
@@ -346,100 +287,60 @@ public class Utils {
         int eventPosition = longEvents.indexOf(toUseLongEvent);
 
         // Subtracts money from correct category
-        Log.d(TAG, "editLongEvent: Subtracting money");
         Event oldLongEvent = longEvents.get(eventPosition);
-        int oldLongEventId = oldLongEvent.getId();
         String category = oldLongEvent.getCategory();
         ArrayList<Double> updatedIncomes;
         ArrayList<Double> updatedOutgoings;
-//        ArrayList<ArrayList> updatedIncomes;
-//        ArrayList<ArrayList> updatedOutgoings;
         updatedIncomes = account.getAllIncomes();
         updatedOutgoings = account.getAllOutgoings();
 
         int incomePosition = -1;
         int outgoingPosition = -1;
         if (oldLongEvent.isIncome()) {
-            Log.d(TAG, "addLongEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addLongEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
 
         if (incomePosition >= 0)    {
-//            for (Object o: updatedIncomes.get(incomePosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldLongEventId) {
-//                    updatedIncomes.get(incomePosition).remove(id);
-//                }
-//            }
-
             double currentAmount = updatedIncomes.get(incomePosition);
-            Log.d(TAG, "editLongEvent: Subtracting income money: " + currentAmount);
             currentAmount = currentAmount - oldLongEvent.getMoney();
-            Log.d(TAG, "editLongEvent: Final income money: " + currentAmount);
             updatedIncomes.set(incomePosition, currentAmount);
         } else if (outgoingPosition >= 0) {
-//            for (Object o: updatedOutgoings.get(outgoingPosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldLongEventId) {
-//                    updatedOutgoings.get(outgoingPosition).remove(id);
-//                }
-//            }
             double currentAmount = updatedOutgoings.get(outgoingPosition);
-            Log.d(TAG, "editLongEvent: Subtracting outgoing money: " + currentAmount);
             currentAmount = currentAmount - oldLongEvent.getMoney();
-            Log.d(TAG, "editLongEvent: Final outgoing money: " + currentAmount);
             updatedOutgoings.set(outgoingPosition, currentAmount);
         }
 
         // Changes event
-        Log.d(TAG, "editLongEvent: Changes event");
         longEvents.set(eventPosition, newLongEvent);
 
         // Adds money to correct category
-        Log.d(TAG, "addLongEvent: Getting category");
         category = newLongEvent.getCategory();
-        int newLongEventId = newLongEvent.getId();
 
         incomePosition = -1;
         outgoingPosition = -1;
         if (newLongEvent.isIncome()) {
-            Log.d(TAG, "addLongEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addLongEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
 
         if (incomePosition >= 0)    {
-//            updatedIncomes.get(incomePosition).add(newLongEventId);
-
             double currentAmount = updatedIncomes.get(incomePosition);
-            Log.d(TAG, "editLongEvent: Adding income money: " + currentAmount);
             currentAmount = currentAmount + newLongEvent.getMoney();
-            Log.d(TAG, "editLongEvent: Final income money: " + currentAmount);
             updatedIncomes.set(incomePosition, currentAmount);
         } else if (outgoingPosition >= 0) {
-//            updatedOutgoings.get(outgoingPosition).add(newLongEventId);
-
             double currentAmount = updatedOutgoings.get(outgoingPosition);
-            Log.d(TAG, "editLongEvent: Adding outgoing money: " + currentAmount);
             currentAmount = currentAmount + newLongEvent.getMoney();
-            Log.d(TAG, "editLongEvent: Final outgoing money: " + currentAmount);
             updatedOutgoings.set(outgoingPosition, currentAmount);
         }
 
@@ -456,7 +357,6 @@ public class Utils {
             }
         }
 
-        Log.d(TAG, "editLongEvent: Updates longEvents list");
         int position = accounts.indexOf(toChangeAccount);
         accounts.get(position).setLongEvents(longEvents);
         accounts.get(position).setAllIncomes(updatedIncomes);
@@ -465,9 +365,7 @@ public class Utils {
         // Updates Shared Preferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        Log.d(TAG, "editLongEvent: PutString");
         editor.putString(ALL_ACCOUNTS_KEY, gson.toJson(accounts));
-        Log.d(TAG, "editLongEvent: COMMIT!!!");
         editor.commit();
     }
 
@@ -479,14 +377,8 @@ public class Utils {
 
         ArrayList<Double> updatedIncomes;
         ArrayList<Double> updatedOutgoings;
-//        ArrayList<ArrayList> updatedNewIncomes;
-//        ArrayList<ArrayList> updatedNewOutgoings;
-//        updatedNewIncomes = account.getNewIncomes();
-//        updatedNewOutgoings = account.getNewOutgoings();
         updatedIncomes = account.getAllIncomes();
-        Log.d(TAG, "addShortEvent: Incomes size: " + updatedIncomes.size());
         updatedOutgoings = account.getAllOutgoings();
-        Log.d(TAG, "addShortEvent: Outgoings size: " + updatedOutgoings.size());
 
         ArrayList<Account> accounts = getAccounts();
         int id = account.getId();
@@ -503,51 +395,35 @@ public class Utils {
         int position = accounts.indexOf(toChangeAccount);
 
         // Adds money to correct category
-        Log.d(TAG, "addShortEvent: Getting category");
         String category = shortEvent.getCategory();
-        int newShortEventId = shortEvent.getId();
         int incomePosition = -1;
         int outgoingPosition = -1;
         if (shortEvent.isIncome()) {
-            Log.d(TAG, "addShortEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addShortEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
 
         if (incomePosition >= 0)    {
-//            updatedNewIncomes.get(incomePosition).add(newShortEventId);
-//            accounts.get(position).setIncomeNull(false);
-
             double currentAmount = updatedIncomes.get(incomePosition);
             currentAmount = currentAmount + shortEvent.getMoney();
             updatedIncomes.set(incomePosition, currentAmount);
             // Incomes has been updated, so it later needs to be updated in the account
         } else if (outgoingPosition >= 0) {
-//            updatedNewOutgoings.get(outgoingPosition).add(newShortEventId);
-//            accounts.get(position).setOutgoingNull(false);
-
             double currentAmount = updatedOutgoings.get(outgoingPosition);
             currentAmount = currentAmount + shortEvent.getMoney();
             updatedOutgoings.set(outgoingPosition, currentAmount);
             // Outgoings has been updated as well
         }
 
-
         // Changes short events in the account
-
         accounts.get(position).setShortEvents(shortEvents);
         accounts.get(position).setAllIncomes(updatedIncomes);
         accounts.get(position).setAllOutgoings(updatedOutgoings);
-//        accounts.get(position).setNewIncomes(updatedNewIncomes);
-//        accounts.get(position).setNewOutgoings(updatedNewOutgoings);
 
         // Updates Shared Preferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -563,45 +439,29 @@ public class Utils {
         longEvents.add(longEvent);
         ArrayList<Double> updatedIncomes;
         ArrayList<Double> updatedOutgoings;
-//        ArrayList<ArrayList> updatedIncomes;
-//        ArrayList<ArrayList> updatedOutgoings;
         updatedIncomes = account.getAllIncomes();
-        Log.d(TAG, "addLongEvent: Incomes size: " + updatedIncomes.size());
         updatedOutgoings = account.getAllOutgoings();
-        Log.d(TAG, "addLongEvent: Outgoings size: " + updatedOutgoings.size());
-
-        Log.d(TAG, "addLongEvent: Groceries at start: " + updatedOutgoings.get(0));
 
         // Adds money to correct category
-        Log.d(TAG, "addLongEvent: Getting category");
         String category = longEvent.getCategory();
-        int newLongEventId = longEvent.getId();
         int incomePosition = -1;
         int outgoingPosition = -1;
         if (longEvent.isIncome()) {
-            Log.d(TAG, "addLongEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addLongEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
 
         if (incomePosition >= 0)    {
-//            updatedIncomes.get(incomePosition).add(newLongEventId);
-
             double currentAmount = updatedIncomes.get(incomePosition);
             currentAmount = currentAmount + longEvent.getMoney();
             updatedIncomes.set(incomePosition, currentAmount);
-            // Incomes has been updated, so it later needs to be updated in the account
+            // Incomes has been updated
         } else if (outgoingPosition >= 0) {
-//            updatedOutgoings.get(outgoingPosition).add(newLongEventId);
-            Log.d(TAG, "addLongEvent: OutgoingPostition is greater or equal to zero");
             double currentAmount = updatedOutgoings.get(outgoingPosition);
             currentAmount = currentAmount + longEvent.getMoney();
             updatedOutgoings.set(outgoingPosition, currentAmount);
@@ -621,8 +481,6 @@ public class Utils {
             }
         }
 
-        Log.d(TAG, "addLongEvent: New updatedOutgoings for groceries: " + updatedOutgoings.get(0));
-
         int position = accounts.indexOf(toChangeAccount);
         accounts.get(position).setLongEvents(longEvents);
         accounts.get(position).setAllIncomes(updatedIncomes);
@@ -640,14 +498,11 @@ public class Utils {
         if (null != accounts) {
             for (Account a: accounts) {
                 if (a.getId() == account.getId()) {
-                    Log.d(TAG, "removeAccount: Id matches");
                     if (accounts.remove(a)) {
-                        Log.d(TAG, "removeAccount: accounts.remove(a) is true");
                         Gson gson = new Gson();
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(ALL_ACCOUNTS_KEY, gson.toJson(accounts));
                         editor.commit();
-                        Log.d(TAG, "removeAccount: Editor committed");
                         break;
                     }
                 }
@@ -671,58 +526,32 @@ public class Utils {
         }
 
         // Subtracts money from correct category
-        Log.d(TAG, "editShortEvent: Subtracting money");
         Event oldShortEvent = toRemoveShortEvent;
         String category = oldShortEvent.getCategory();
         ArrayList<Double> updatedIncomes;
         ArrayList<Double> updatedOutgoings;
-//        ArrayList<ArrayList> updatedIncomes;
-//        ArrayList<ArrayList> updatedOutgoings;
         updatedIncomes = account.getAllIncomes();
         updatedOutgoings = account.getAllOutgoings();
 
         int incomePosition = -1;
         int outgoingPosition = -1;
         if (oldShortEvent.isIncome()) {
-            Log.d(TAG, "addShortEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addShortEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addShortEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
 
         if (incomePosition >= 0)    {
-//            int oldShortEventId = oldShortEvent.getId();
-//            for (Object o: updatedIncomes.get(incomePosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldShortEventId) {
-//                    updatedIncomes.get(incomePosition).remove(id);
-//                }
-//            }
-
             double currentAmount = updatedIncomes.get(incomePosition);
-            Log.d(TAG, "editShortEvent: Subtracting income money: " + currentAmount);
             currentAmount = currentAmount - oldShortEvent.getMoney();
-            Log.d(TAG, "editShortEvent: Final income money: " + currentAmount);
             updatedIncomes.set(incomePosition, currentAmount);
         } else if (outgoingPosition >= 0) {
-//            int oldShortEventId = oldShortEvent.getId();
-//            for (Object o: updatedOutgoings.get(outgoingPosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldShortEventId) {
-//                    updatedOutgoings.get(outgoingPosition).remove(id);
-//                }
-//            }
             double currentAmount = updatedOutgoings.get(outgoingPosition);
-            Log.d(TAG, "editShortEvent: Subtracting outgoing money: " + currentAmount);
             currentAmount = currentAmount - oldShortEvent.getMoney();
-            Log.d(TAG, "editShortEvent: Final outgoing money: " + currentAmount);
             updatedOutgoings.set(outgoingPosition, currentAmount);
         }
 
@@ -734,7 +563,6 @@ public class Utils {
         int id = account.getId();
 
         Account toChangeAccount = null;
-        int count = 0;
         if (null != accounts) {
             for (Account a: accounts) {
                 if (a.getId() == id) {
@@ -771,57 +599,31 @@ public class Utils {
         }
 
         // Subtracts money from correct category
-        Log.d(TAG, "editLongEvent: Subtracting money");
         Event oldLongEvent = toRemoveLongEvent;
         String category = oldLongEvent.getCategory();
         ArrayList<Double> updatedIncomes;
         ArrayList<Double> updatedOutgoings;
-//        ArrayList<ArrayList> updatedIncomes;
-//        ArrayList<ArrayList> updatedOutgoings;
         updatedIncomes = account.getAllIncomes();
         updatedOutgoings = account.getAllOutgoings();
 
         int incomePosition = -1;
         int outgoingPosition = -1;
         if (oldLongEvent.isIncome()) {
-            Log.d(TAG, "addLongEvent: Income");
             if (possibleIncomes.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleIncomes");
                 incomePosition = possibleIncomes.indexOf(category);
             }
         } else {
-            Log.d(TAG, "addLongEvent: Not income");
             if (possibleOutgoings.contains(category)) {
-                Log.d(TAG, "addLongEvent: category in possibleOutgoings");
                 outgoingPosition = possibleOutgoings.indexOf(category);
             }
         }
-
-        int oldLongEventId = oldLongEvent.getId();
-
         if (incomePosition >= 0)    {
-//            for (Object o: updatedIncomes.get(incomePosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldLongEventId) {
-//                    updatedIncomes.get(incomePosition).remove(id);
-//                }
-//            }
             double currentAmount = updatedIncomes.get(incomePosition);
-            Log.d(TAG, "editLongEvent: Subtracting income money: " + currentAmount);
             currentAmount = currentAmount - oldLongEvent.getMoney();
-            Log.d(TAG, "editLongEvent: Final income money: " + currentAmount);
             updatedIncomes.set(incomePosition, currentAmount);
         } else if (outgoingPosition >= 0) {
-//            for (Object o: updatedOutgoings.get(outgoingPosition)) {
-//                int id = Integer.valueOf(String.valueOf(o));
-//                if (id == oldLongEventId) {
-//                    updatedOutgoings.get(outgoingPosition).remove(id);
-//                }
-//            }
             double currentAmount = updatedOutgoings.get(outgoingPosition);
-            Log.d(TAG, "editLongEvent: Subtracting outgoing money: " + currentAmount);
             currentAmount = currentAmount - oldLongEvent.getMoney();
-            Log.d(TAG, "editLongEvent: Final outgoing money: " + currentAmount);
             updatedOutgoings.set(outgoingPosition, currentAmount);
         }
 
@@ -833,7 +635,6 @@ public class Utils {
         int id = account.getId();
 
         Account toChangeAccount = null;
-        int count = 0;
         if (null != accounts) {
             for (Account a: accounts) {
                 if (a.getId() == id) {
@@ -947,11 +748,7 @@ public class Utils {
     }
 
     public double getTotalAmount(Event e, int eDay, int eMonth, int eYear, int day, int month, int year){
-        Log.d(TAG, "getTotalAmount: Event date: " + eDay + " " + eMonth + " " + eYear);
-        Log.d(TAG, "getTotalAmount: Current date " + day + " " + month + " " + year);
-        if (isBefore(eDay, eMonth, eYear, day, month, year)) {
-            Log.d(TAG, "getTotalBalances: It's before");
-
+       if (isBefore(eDay, eMonth, eYear, day, month, year)) {
             double add = 0;
             double times = 0;
 
@@ -961,16 +758,6 @@ public class Utils {
 
                 cal1.set(eDay, eMonth, eYear);
                 cal2.set(year, month, day);
-
-                Log.d(TAG, "getTotalAmount: Event date: " + eDay + " " + eMonth + " " + eYear);
-                Log.d(TAG, "getTotalAmount: Current date " + day + " " + month + " " + year);
-                Log.d(TAG, "getTotalAmount: Cal1 is: " + cal1);
-                Log.d(TAG, "getTotalAmount: Cal2 is: " + cal2);
-
-                Log.d(TAG, "getTotalBalances: Days Between: " + daysBetween(cal1.getTime(), cal2.getTime()));
-                Log.d(TAG, "getTotalBalances: RepeatNum: " + e.getRepeatNum());
-
-                ///////////
                 LocalDate dateBefore = LocalDate.of(2005,Month.NOVEMBER,27);
 
                 if (eMonth == 1) {
@@ -1029,19 +816,12 @@ public class Utils {
 
                 long chronoDays = ChronoUnit.DAYS.between(dateBefore,dateAfter);
                 chronoDays = Integer.valueOf(String.valueOf(chronoDays));
-                Log.d(TAG, "getTotalAmount: chronoDays is " + chronoDays);
-                ///////////
-
-                //times = daysBetween(cal1.getTime(), cal2.getTime()) / e.getRepeatNum();
                 times = chronoDays / e.getRepeatNum();
 
                 if (e.getRepeatPeriod().equals("Week(s)")) {
-                    Log.d(TAG, "getTotalBalances: Weeks");
-
                     times = (times / 7) + 1;
                     times = (int) times;
                 } else {
-                    Log.d(TAG, "getTotalBalances: Days");
                     if ((e.getRepeatNum() * times) != daysBetween(cal1.getTime(), cal2.getTime())) {
                         times = times + 1;
                     }
@@ -1050,7 +830,6 @@ public class Utils {
             }
 
             if (e.getRepeatPeriod().equals("Month(s)")) {
-                Log.d(TAG, "getTotalBalances: Months");
                 if (year > eYear) {
                     times += 12 * (year - eYear);
                 }
@@ -1065,7 +844,6 @@ public class Utils {
             }
 
             if (e.getRepeatPeriod().equals("Year(s)")) {
-                Log.d(TAG, "getTotalBalances: years");
                 times = year - eYear + 1;
                 if (eMonth > month) {
                     times -= 1;
@@ -1075,7 +853,6 @@ public class Utils {
 
             return(add);
         }
-        Log.d(TAG, "getTotalAmount: Returned 0");
         return(0.0);
     }
 
@@ -1089,7 +866,6 @@ public class Utils {
         ArrayList<Event> shortEvents = account.getShortEvents();
         for (Event e: shortEvents) {
             // Only edits money if date is less than or equal to given date
-
             if (isBefore(e.getDay(), e.getMonth()+1, e.getYear(), day, month, year)) {
                 if (e.isIncome()) {
                     totalBalances.set(1, totalBalances.get(1) + e.getMoney());
@@ -1099,13 +875,11 @@ public class Utils {
             }
         }
 
-        Log.d(TAG, "getTotalBalances: About to check long Events");
         ArrayList<Event> longEvents = account.getLongEvents();
         for (Event e: longEvents) {
             // Only edits money if date is less than or equal to given date
             double add = getTotalAmount(e,e.getDay(),e.getMonth(),e.getYear(),day,month,year);
 
-            Log.d(TAG, "getTotalBalances: End Add is: " + add);
             if (e.isIncome()) {
                 totalBalances.set(1, totalBalances.get(1) + add);
             } else {
@@ -1124,7 +898,6 @@ public class Utils {
         int id = accountId;
 
         Account toChangeAccount = null;
-        int count = 0;
         if (null != accounts) {
             for (Account a: accounts) {
                 if (a.getId() == id) {
