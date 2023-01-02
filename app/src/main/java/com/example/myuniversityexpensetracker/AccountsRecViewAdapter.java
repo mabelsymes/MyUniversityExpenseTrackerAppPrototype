@@ -27,7 +27,6 @@ public class AccountsRecViewAdapter extends RecyclerView.Adapter<AccountsRecView
     public AccountsRecViewAdapter(Context mContext, String parentActivity) {
         this.mContext = mContext;
         this.parentActivity = parentActivity;
-        Log.d(TAG, "AccountsRecViewAdapter: Accounts has been set");
         setAccounts(Utils.getInstance(mContext).getAccounts());
     }
 

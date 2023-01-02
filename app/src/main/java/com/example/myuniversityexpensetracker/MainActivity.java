@@ -357,12 +357,12 @@ public class MainActivity extends AppCompatActivity {
     public void setStartingPossibleIncomesAndOutgoings () {
 
         ArrayList<String> incomePossibilities = new ArrayList<>();
-        incomePossibilities.add("Salary"); //
-        incomePossibilities.add("Wages"); //
-        incomePossibilities.add("Part Time Job"); //
+        incomePossibilities.add("Salary");
+        incomePossibilities.add("Wages");
+        incomePossibilities.add("Part Time Job");
         incomePossibilities.add("Sales");
         incomePossibilities.add("Gifts");
-        //
+
         incomePossibilities.add("Groceries");
         incomePossibilities.add("Going out");
         incomePossibilities.add("Food");
@@ -370,9 +370,9 @@ public class MainActivity extends AppCompatActivity {
         incomePossibilities.add("Clothes");
         incomePossibilities.add("Essentials");
         incomePossibilities.add("Phone");
-        incomePossibilities.add("Accommodation"); //
-        incomePossibilities.add("Tuition"); //
-        incomePossibilities.add("Subscriptions"); //
+        incomePossibilities.add("Accommodation");
+        incomePossibilities.add("Tuition");
+        incomePossibilities.add("Subscriptions");
         incomePossibilities.add("Holidays");
         incomePossibilities.add("Utility Bills");
         incomePossibilities.add("Washing");
@@ -398,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
         outgoingPossibilities.add("Entertainment");
         outgoingPossibilities.add("Electronics");
         outgoingPossibilities.add("Uni Supplies");
-        //
+
         outgoingPossibilities.add("Salary");
         outgoingPossibilities.add("Wages");
         outgoingPossibilities.add("Part Time Job");

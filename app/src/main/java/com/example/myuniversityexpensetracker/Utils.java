@@ -701,7 +701,7 @@ public class Utils {
         outgoingPossibilities.add("Entertainment");
         outgoingPossibilities.add("Electronics");
         outgoingPossibilities.add("Uni Supplies");
-        //
+
         outgoingPossibilities.add("Salary");
         outgoingPossibilities.add("Wages");
         outgoingPossibilities.add("Part Time Job");
