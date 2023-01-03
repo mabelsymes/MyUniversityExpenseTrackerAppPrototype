@@ -31,7 +31,7 @@
                 android:id="@+id/txtShortEventCategory"
                 android:minWidth="100dp"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/purple_200"
                 />
 
             <TextView
